@@ -9,15 +9,9 @@ if ($url == '/') {
     // Initiate the home controller
     // and render the home view
 
-    require_once __DIR__ . $projectName.'/Models/index_model.php';
-    require_once __DIR__ . $projectName.'/Controllers/index_controller.php';
-    require_once __DIR__ . $projectName.'/Views/index_view.php';
+    require_once __DIR__ . $projectName . '/Controllers/IndexController.php';
 
-    $indexModel = new IndexModel();
-    $indexController = new IndexController($indexModel);
-    $indexView = new IndexView($indexController, $indexModel);
-
-    print $indexView->index();
+    $indexController = new IndexController;
 } else {
 
     // This is not home page
@@ -37,26 +31,19 @@ if ($url == '/') {
 
     // Check if controller exists. NB: 
     // You have to do that for the model and the view too
-    $ctrlPath = __DIR__ . $projectName.'/Controllers/' . $requestedController . '_controller.php';
+    $ctrlPath = __DIR__ . $projectName . '/Controllers/' . ucfirst($requestedController) . 'Controller.php';
 
     if (file_exists($ctrlPath)) {
 
-        require_once __DIR__ . $projectName.'/Models/' . $requestedController . '_model.php';
-        require_once __DIR__ . $projectName.'/Controllers/' . $requestedController . '_controller.php';
-        require_once __DIR__ . $projectName.'/Views/' . $requestedController . '_view.php';
+        require_once __DIR__ . $projectName . '/Controllers/' . ucfirst($requestedController) . 'Controller.php';
 
-        $modelName      = ucfirst($requestedController) . 'Model';
         $controllerName = ucfirst($requestedController) . 'Controller';
-        $viewName       = ucfirst($requestedController) . 'View';
-
-        $controllerObj  = new $controllerName(new $modelName);
-        $viewObj        = new $viewName($controllerObj, new $modelName);
 
         // If there is a method - Second parameter
         if ($requestedAction != '') {
-            // then we call the method via the view
-            // dynamic call of the view
-            print $viewObj->$requestedAction($requestedParams);
+            (new $controllerName($requestedParams))->$requestedAction();
+        } else {
+            (new $controllerName($requestedParams))->index();
         }
     } else {
 

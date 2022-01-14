@@ -2,7 +2,7 @@
 include __DIR__ . '/../Models/IndexModel.php';
 include __DIR__.'/Controller.php';
 
-class IndexController
+class IndexController extends Controller
 {
     public $model;
     public function __construct($params = null)
@@ -12,7 +12,7 @@ class IndexController
 
     public function index()
     {
-        view('test');
+        $this->view('test',['data'=>'working fine']);
     }
 
     public function saif()

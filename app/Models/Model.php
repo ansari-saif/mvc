@@ -3,7 +3,7 @@
     /**
     * The home page model
     */
-    class IndexModel
+    class Model
     {       
         public function index()
         {

@@ -1,6 +1,16 @@
 <?php
+require_once __DIR__.'/IndexController.php';
+require_once __DIR__.'/SaifController.php';
+require_once __DIR__ . '/../Models/Model.php';
+
 class Controller
 {
+    public $model;
+    public function __construct($params = null)
+    {
+        $this->model = new Model;
+    }
+
     function view($fileName,$data=null)
     {
         if ($data) {

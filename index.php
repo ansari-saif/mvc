@@ -11,7 +11,7 @@ if ($url == '/') {
 
     require_once __DIR__ . $projectName . '/Controllers/IndexController.php';
 
-    $indexController = new IndexController;
+    $indexController = (new IndexController)->index();
 } else {
 
     // This is not home page

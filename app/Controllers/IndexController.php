@@ -5,12 +5,6 @@ class IndexController extends Controller
 
     public function index()
     {
-        $this->view('test',['data'=>'working fine']);
+        $this->view("test");
     }
-
-    public function saif()
-    {
-        echo "working good";
-    }
-
 }

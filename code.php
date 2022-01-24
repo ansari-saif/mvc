@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // read .env file 
 $lines = file(__DIR__ . '/.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -20,6 +20,15 @@ foreach ($lines as $line) {
 }
 // read end end
 
-function env($name){
+function env($name)
+{
     return getenv($name);
+}
+
+function ckc($data)
+{
+    echo "<pre>";
+    print_r($data);
+    echo "</pre>";
+    die();
 }

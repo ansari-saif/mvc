@@ -1,6 +1,4 @@
 <?php
-require_once __DIR__.'/IndexController.php';
-require_once __DIR__.'/SaifController.php';
 require_once __DIR__ . '/../Models/Model.php';
 
 class Controller
@@ -22,4 +20,11 @@ class Controller
         ob_end_clean();
         print $var;
     }
+
+    public function slug($string){
+		$slug = strtolower(trim(preg_replace("/[\s-]+/", "-", preg_replace( "/[^a-zA-Z0-9\-]/", '-', addslashes($string))),"-"));
+   		return $slug;
+	}
+
+    
 }

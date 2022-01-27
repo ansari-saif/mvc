@@ -14,6 +14,6 @@
     </style>
 </head>
 <body>
-    <h1>welcome to saif Controller ADMIN</h1>
+    <h1>welcome to saif Controller</h1>
 </body>
 </html>

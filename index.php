@@ -6,8 +6,9 @@ require_once __DIR__ . '/code.php';
 
 $projectName = env("APP_NAME");
 
-require_once __DIR__ . '/' . $projectName . '/Controllers/Controller.php';
 if ($url == '/') {
+    require_once __DIR__ . '/' . $projectName . '/Controllers/Controller.php';
+
     require_once __DIR__ . '/' . $projectName . '/Controllers/IndexController.php';
     $indexController = (new IndexController)->index();
 } else {
@@ -16,6 +17,8 @@ if ($url == '/') {
     $requestedParams = array_slice($url, 2);
     if ($requestedController == env("APP_ADMIN_URL")) {
         $projectName = env("APP_ADMIN_NAME");
+        require_once __DIR__ . '/' . $projectName . '/Controllers/Controller.php';
+
         if (isset($url[1])) {
             $requestedController = $url[1];
         } else {
@@ -25,6 +28,8 @@ if ($url == '/') {
         }
         $requestedAction = isset($url[2]) ? $url[2] : '';
         $requestedParams = array_slice($url, 3);
+    } else {
+        require_once __DIR__ . '/' . $projectName . '/Controllers/Controller.php';
     }
     $ctrlPath = __DIR__ . '/' . $projectName . '/Controllers/' . ucfirst($requestedController) . 'Controller.php';
     if (file_exists($ctrlPath)) {

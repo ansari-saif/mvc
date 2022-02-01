@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../Models/Model.php';
+require_once __DIR__ . env("APP_ADMIN_NAME") . '/../Models/Model.php';
 
 class Controller
 {

@@ -5,7 +5,7 @@
  */
 class Model
 {
-	private $conn;
+    private $conn;
 
     public function __construct()
     {
@@ -60,12 +60,12 @@ class Model
     function save($data, $table, $id = null)
     {
         foreach ($data as $key => $value) {
-            $array[] = "`$key`='" . $value. "'";
+            $array[] = "`$key`='" . $value . "'";
         }
         $datatoupdate = implode(", ", $array);
         if ($id) {
             $sql = "UPDATE `$table` SET $datatoupdate WHERE id = $id";
-        }else{
+        } else {
             $sql = "INSERT INTO  `$table` SET $datatoupdate";
         }
         return $this->execute($sql);
@@ -77,7 +77,7 @@ class Model
         return $this->execute($sql);
     }
 
-    public function getData($query, $all = false)
+    public function getData($query, $all = true)
     {
         $result = $this->conn->prepare($query);
         $query = $result->execute();
@@ -86,12 +86,26 @@ class Model
             die();
         }
         $result->setFetchMode(PDO::FETCH_ASSOC);
-        $reponse = $result->fetch();
-        return $all ? $result->fetch() :  $result->fetchAll();
+        return $all ? $result->fetchAll() :  $result->fetch();
     }
     public function execute($query)
     {
         $response = $this->conn->exec($query);
         return $response;
+    }
+
+    public function paginate($query, $numRecords)
+    {
+        $page = isset($_GET["page"]) ? $_GET["page"] : 1;
+        $total_pages = $this->getData($query);
+        $total_pages = count($total_pages);
+        $limit = $numRecords;
+        $start = $page ?  ($page - 1) * $limit : 0;
+        $sql = $query . " LIMIT $start, $limit ";
+        $result = $this->getData($sql);
+        return [
+            "total_count" => $total_pages,
+            "data" => $result
+        ];
     }
 }

@@ -77,7 +77,7 @@ class Model
         return $this->execute($sql);
     }
 
-    public function getData($query, $all = false)
+    public function getData($query, $all = true)
     {
         $result = $this->conn->prepare($query);
         $query = $result->execute();
@@ -86,8 +86,7 @@ class Model
             die();
         }
         $result->setFetchMode(PDO::FETCH_ASSOC);
-        $reponse = $result->fetch();
-        return $all ? $result->fetch() :  $result->fetchAll();
+        return $all ? $result->fetchAll() :  $result->fetch();
     }
     public function execute($query)
     {

@@ -48,7 +48,7 @@ class Controller
             {
                 for ($counter = 1; $counter <= $lastpage; $counter++) {
                     if ($counter == $page)
-                        $pagination .= "<a href=\"\" class=\"SelectNum\"> $counter </a>";
+                        $pagination .= "<a href=\"\" class=\"active\"> $counter </a>";
                     else
                         $pagination .= "<a href=\"$targetpage?page=$counter\"> $counter </a>";
                 }
@@ -58,7 +58,7 @@ class Controller
                 if ($page < 1 + ($adjacents * 2)) {
                     for ($counter = 1; $counter < 4 + ($adjacents * 2); $counter++) {
                         if ($counter == $page)
-                            $pagination .= "<a href=\"\" class=\"SelectNum\"> $counter </a>";
+                            $pagination .= "<a href=\"\" class=\"active\"> $counter </a>";
                         else
                             $pagination .= "<a href=\"$targetpage?page=$counter\"> $counter </a>";
                     }
@@ -71,7 +71,7 @@ class Controller
                     $pagination .= "<a href=\"$targetpage?page=2\">2</a>";
                     for ($counter = $page - $adjacents; $counter <= $page + $adjacents; $counter++) {
                         if ($counter == $page)
-                            $pagination .= "<a href=\"\" class=\"SelectNum\"> $counter </a>";
+                            $pagination .= "<a href=\"\" class=\"active\"> $counter </a>";
                         else
                             $pagination .= "<a href=\"$targetpage?page=$counter\"> $counter </a>";
                     }
@@ -84,7 +84,7 @@ class Controller
                     $pagination .= "<a href=\"$targetpage?page=2\"> 2 </a>";
                     for ($counter = $lastpage - (2 + ($adjacents * 2)); $counter <= $lastpage; $counter++) {
                         if ($counter == $page)
-                            $pagination .= "<a href=\"\" class=\"SelectNum\"> $counter </a>";
+                            $pagination .= "<a href=\"\" class=\"active\"> $counter </a>";
                         else
                             $pagination .= "<a href=\"$targetpage?page=$counter\"> $counter </a>";
                     }

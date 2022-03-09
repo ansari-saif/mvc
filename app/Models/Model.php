@@ -97,15 +97,20 @@ class Model
     public function paginate($query, $numRecords)
     {
         $page = isset($_GET["page"]) ? $_GET["page"] : 1;
-        $tbl_name = "query";
-        $total_pages = $this->getData($query);
-        $total_pages = count($total_pages);
+        $totalRecordData = $this->getData($query);
+        $totalRecord = count($totalRecordData);
         $limit = $numRecords;
         $start = $page ?  ($page - 1) * $limit : 0;
         $sql = $query . "  LIMIT $start, $limit ";
         $result = $this->getData($sql);
+        $lastPage = ceil($totalRecord / $numRecords);
+
         return [
-            "total_count" => $total_pages,
+            "total_count" => $totalRecord,
+            "current_page" => $page,
+            "record_per_page" => $numRecords,
+            "record_start_index" =>  $start,
+            "last_page" => $lastPage,
             "data" => $result
         ];
     }

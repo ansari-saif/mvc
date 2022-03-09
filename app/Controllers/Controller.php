@@ -27,15 +27,15 @@ class Controller
         return $slug;
     }
 
-    public function paginationHtml($totalRecord, $numRecords)
+    public function paginationHtml($data)
     {
         $adjacents = 3;
-        $page = isset($_GET["page"]) ? $_GET["page"] : 1;
+        $page = $data['current_page'];
         $targetpage = '';
         if ($page == 0) $page = 1;
         $prev = $page - 1;
         $next = $page + 1;
-        $lastpage = ceil($totalRecord / $numRecords);
+        $lastpage = $data['last_page'];
         $lpm1 = $lastpage - 1;
         $pagination = "";
         if ($lastpage > 1) {
